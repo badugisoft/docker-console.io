@@ -9,7 +9,7 @@ RUN apk add --no-cache git &&\
     git clone https://github.com/nkashyap/console.io.git $APP_PATH &&\
     cd $APP_PATH &&\
     git checkout tags/v$CONSOLEIO_VERSION &&\
-    npm install &&\
+    npm install --production &&\
     npm run express.io &&\
     npm run express &&\
     npm cache clean --force &&\
