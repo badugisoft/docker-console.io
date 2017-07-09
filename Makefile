@@ -21,16 +21,16 @@ stop:
 	@docker stop $(CONTAINER_NAME)
 
 remove:
-	@docker stop $(CONTAINER_NAME) || true
-	@docker rm $(CONTAINER_NAME)
+	@docker stop $(CONTAINER_NAME) ||\
+		docker rm $(CONTAINER_NAME)
 
 run:
-	@docker stop $(CONTAINER_NAME) || true
-	@docker rm $(CONTAINER_NAME) || true
-	@docker run -d --name $(CONTAINER_NAME) \
-		-p $(HOST_PORT):$(CONTAINER_PORT) \
-		$(IMAGE_NAME):$(IMAGE_VERSION)
+	@docker stop $(CONTAINER_NAME) ||\
+		docker rm $(CONTAINER_NAME) ||\
+		docker run -d --name $(CONTAINER_NAME) \
+			-p $(HOST_PORT):$(CONTAINER_PORT) \
+			$(IMAGE_NAME):$(IMAGE_VERSION)
 
 push:
-	@docker push $(IMAGE_NAME):$(IMAGE_VERSION)
-	@docker push $(IMAGE_NAME):latest
+	@docker push $(IMAGE_NAME):$(IMAGE_VERSION) \
+		docker push $(IMAGE_NAME):latest
